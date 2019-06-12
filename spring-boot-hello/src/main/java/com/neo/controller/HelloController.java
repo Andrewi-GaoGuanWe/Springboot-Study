@@ -10,4 +10,9 @@ public class HelloController {
     public String index() {
         return "Hello Spring Boot 2.0!";
     }
+
+    @RequestMapping("/Hello")
+    public String hello(){
+        return "Hello Spring Boot 2.0！";
+    }
 }
