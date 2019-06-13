@@ -25,11 +25,14 @@ public class MyShiroRealm extends AuthorizingRealm {
         SimpleAuthorizationInfo authorizationInfo = new SimpleAuthorizationInfo();
         UserInfo userInfo  = (UserInfo)principals.getPrimaryPrincipal();
         for(SysRole role:userInfo.getRoleList()){
+            // 获取角色列表，添加到authorizationInfo的addRole中
             authorizationInfo.addRole(role.getRole());
             for(SysPermission p:role.getPermissions()){
+                // 获取每个角色对应的权限，并添加到authorizationInfo的addStringPermission中
                 authorizationInfo.addStringPermission(p.getPermission());
             }
         }
+        //返回权限对象
         return authorizationInfo;
     }
 
@@ -48,6 +51,7 @@ public class MyShiroRealm extends AuthorizingRealm {
         if(userInfo == null){
             return null;
         }
+        // 如果查询到返回认证信息AuthenticationInfo
         SimpleAuthenticationInfo authenticationInfo = new SimpleAuthenticationInfo(
                 userInfo, //用户名
                 userInfo.getPassword(), //密码
