@@ -5,7 +5,10 @@ import org.apache.shiro.authc.UnknownAccountException;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.util.Map;
 
 @Controller
@@ -21,7 +24,13 @@ public class HomeController {
         // 登录失败从request中获取shiro处理的异常信息。
         // shiroLoginFailure:就是shiro异常类的全类名.
         String exception = (String) request.getAttribute("shiroLoginFailure");
-        System.out.println("exception=" + exception);
+/*        String getMethod = request.getMethod();
+        Cookie[] Cookies = request.getCookies();
+        HttpSession httpServlet = request.getSession();
+        System.out.println("getMethod=" + getMethod);
+        System.out.println("Cookies.value=" + Cookies.toString());
+        System.out.println("httpServlet=" + httpServlet.getCreationTime());
+        System.out.println("exception=" + exception);*/
         String msg = "";
         if (exception != null) {
             if (UnknownAccountException.class.getName().equals(exception)) {
