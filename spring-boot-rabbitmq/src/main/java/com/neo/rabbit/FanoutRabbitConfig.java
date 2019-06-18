@@ -28,6 +28,7 @@ public class FanoutRabbitConfig {
 
     @Bean
     FanoutExchange fanoutExchange() {
+        // 在rabbitmq声明交换机:fanoutExchange
         return new FanoutExchange("fanoutExchange");
     }
 

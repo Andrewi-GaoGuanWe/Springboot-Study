@@ -11,16 +11,22 @@ public class TopicSender {
 
 	@Autowired
 	private AmqpTemplate rabbitTemplate;
-
+	// 消息发送者
 	public void send() {
 		String context = "hi, i am message all";
 		System.out.println("Sender : " + context);
+		//第一个参数表示Exchange交换机的名称
+		//第二个参数表示路由Key，Fanout方式路由消息不会处理路由key
+		//第三个参数为要发送的消息
 		this.rabbitTemplate.convertAndSend("topicExchange", "topic.1", context);
 	}
 
 	public void send1() {
 		String context = "hi, i am message 1";
 		System.out.println("Sender : " + context);
+		//第一个参数表示Exchange交换机的名称
+		//第二个参数表示路由Key，Fanout方式路由消息不会处理路由key
+		//第三个参数为要发送的消息
 		this.rabbitTemplate.convertAndSend("topicExchange", "topic.message", context);
 	}
 

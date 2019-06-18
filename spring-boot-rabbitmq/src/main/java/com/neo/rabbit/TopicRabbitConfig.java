@@ -16,6 +16,7 @@ public class TopicRabbitConfig {
 
     @Bean
     public Queue queueMessage() {
+        // 在rabbitmp中创建队列 topic.message
         return new Queue(TopicRabbitConfig.message);
     }
 
@@ -26,11 +27,14 @@ public class TopicRabbitConfig {
 
     @Bean
     TopicExchange exchange() {
+        // 在rabbitmq中创建exchange 名：topicExchange
         return new TopicExchange("topicExchange");
     }
 
     @Bean
     Binding bindingExchangeMessage(Queue queueMessage, TopicExchange exchange) {
+        //将topic.message队列绑定到topicExchange交换机上
+        //以 direct 方式接收消息需要指定路由key，也就是with传入的参数
         return BindingBuilder.bind(queueMessage).to(exchange).with("topic.message");
     }
 
